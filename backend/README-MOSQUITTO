@@ -1,5 +1,0 @@
-
-mosquitto_sub -v -t \$SYS/#
-mosquitto_sub -d -t '$SYS/broker/clients/active'
-
-
