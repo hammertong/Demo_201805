@@ -11,7 +11,7 @@ REQUIREMENTS
 
 Google 
 upload-keystore.jks
-PWD: Aigor1705
+PWD: Aig..5
 
 
 UPSTREAM
