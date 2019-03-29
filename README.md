@@ -9,7 +9,7 @@
 - installazione della app su smartphone con gestione remota da computer linux
 
 
-# Topic di statistiche generali del broker**
+# Topic di statistiche generali del broker
 ```
 mosquitto_sub -v -t \$SYS/#
 mosquitto_sub -d -t '$SYS/broker/clients/active'
@@ -18,11 +18,15 @@ mosquitto_sub -d -t '$SYS/broker/clients/active'
 # Consumazione dal backend della coda upstream prodotta da android
  
 ```
-export topic="/downstream/intent/montini.f.T1"
 mosquitto_sub -t /upstream/# -v
 ```
 
 # Produzione sulla coda di topic downstream
+
+**definire primala variabile di ambiente della coda di produzione**
+```
+export topic="/downstream/intent/montini.f.T1"
+```
 
 ## Scatto fotogramma
 ```
