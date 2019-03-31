@@ -22,15 +22,7 @@
     <link rel="stylesheet" type="text/css" href="lib/buttons.dataTables.min.css">  
     <link rel="stylesheet" type="text/css" href="lib/shCore.css">
     <link rel="stylesheet" type="text/css" href="lib/demo.css">
-  
-    <style class="init">
-      ui-menu { 
-        margin-top: 30px;   
-        width: 180px; 
-        border: 0px;    
-      }
-    </style>
-
+      
     <script type="text/javascript" language="javascript" src="lib/jquery-3.3.1.js"></script>
     <script type="text/javascript" language="javascript" src="lib/jquery.dataTables.js"></script>
     <script type="text/javascript" language="javascript" src="lib/dataTables.select.min.js"></script>
@@ -40,6 +32,28 @@
 
     <link rel="stylesheet" href="lib/jquery-ui.css">
     <script src="lib/jquery-ui.js"></script>
+
+    <style class="init">
+      /* http://api.jqueryui.com/menu/ */
+      .ui-menu { 
+        margin-top: 30px;   
+        width: 180px; 
+        border: 0px;    
+      }
+      /* local management */
+      .main-pane {
+        width: 100%;
+        border: 0px;
+      }
+      .left-pane {
+        width: 190px;
+        vertical-align: top;
+      }
+      .right-pane {
+        width: 100%;
+        vertical-align: top;
+      }
+    </style>
 
     <script type="text/javascript">
 
@@ -180,7 +194,7 @@
     </script>
   </head>
 
-  <body class="dt-example">    
+  <body>    
 
     <!--CONFIRM DIALOG BOX -->    
 
@@ -188,65 +202,94 @@
       <p id="dialogMessage">Procedere con l'operazione selezionata?</p>
     </div>
 
-    <!-- BEGIN MENU -->    
+    <table class="main-pane">
 
-    <ul id="menu">
-      <li class="ui-state-disabled"><div>BACKEND</div></li>
-      <li><div>IoTC</div>
-        <ul>
-          <li class="ui-state-disabled"><div>MQTT BROKER</div></li>
-          <li><div onclick='document.location.href="../tool-revk/"'>ca errors</div></li>
-          <li><div onclick='document.location.href="../tool-mqtt/"'>connected devices</div></li>
-        </ul>
-      </li>  
-      <li><div>APPs</div>
-        <ul>
-          <li class="ui-state-disabled"><div>COUNTERS</div></li>
-          <li><div onclick='document.location.href="../tool-accs/"'>access</div></li>
-          <li class="ui-state-disabled"><div>USERS</div></li>
-          <li><div onclick='document.location.href="../tool-ureq/?user=charles@yopmail.com"'>requests</div></li>            
-          <li><div onclick='document.location.href="../tool-upns/?user=charles@yopmail.com"'>notifications</div></li>      
-        </ul>
-      </li>  
-    </ul>
+      <tr>
+        
+        <td class="left-pane">  
 
-    <!-- END MENU -->
+          <!-- BEGIN MENU -->    
 
-    <!--
-    <div class="ui-widget" style="margin-top: 10px;">
-      <label for="tags">Username: </label>
-      <input id="tags" placeholder="search username ...">
-    </div>
-    -->
+          <ul id="menu">
+            <li class="ui-state-disabled"><div>Toys (n/a)</div></li>
+            <li><div>Books</div></li>
+            <li><div>Clothing</div></li>
+            <li><div>Electronics</div>
+              <ul>
+                <li class="ui-state-disabled"><div>Home Entertainment</div></li>
+                <li><div>Car Hifi</div></li>
+                <li><div>Utilities</div></li>
+              </ul>
+            </li>
+            <li><div>Movies</div></li>
+            <li><div>Music</div>
+              <ul>
+                <li><div>Rock</div>
+                  <ul>
+                    <li><div>Alternative</div></li>
+                    <li><div>Classic</div></li>
+                  </ul>
+                </li>
+                <li><div>Jazz</div>
+                  <ul>
+                    <li><div>Freejazz</div></li>
+                    <li><div>Big Band</div></li>
+                    <li><div>Modern</div></li>
+                  </ul>
+                </li>
+                <li><div>Pop</div></li>
+              </ul>
+            </li>
+            <li class="ui-state-disabled"><div>Specials (n/a)</div></li>
+          </ul>
 
-    <div class="container">
-      
-      <h1>Status report<span> - smartphones list</span></h1>
+          <!-- END MENU -->
 
-        <table id="results" class="display" style="width:100%">
-          <thead>
-            <tr>          
-              <th>userid</th>
-              <th>username</th>
-              <th>email</th>
-              <th>registration date</th>
-              <th>country</th>
-              <th>src_app</th>
-            </tr>
-          </thead>
-          <tfoot>
-            <tr>                    
-              <th>userid</th>
-              <th>username</th>
-              <th>email</th>
-              <th>registration date</th>
-              <th>country</th>
-              <th>src_app</th>
-            </tr>
-          </tfoot>
-        </table>  
+        </td> <!-- end left pane -->
 
-    </div>    
+        <td class="right-pane">
+
+          <!--
+          <div class="ui-widget" style="margin-top: 10px;">
+            <label for="tags">Username: </label>
+            <input id="tags" placeholder="search username ...">
+          </div>
+          -->
+
+          <div class="container">
+            
+            <h1>Status report<span> - smartphones list</span></h1>
+
+              <table id="results" class="display" style="width:100%">
+                <thead>
+                  <tr>          
+                    <th>userid</th>
+                    <th>username</th>
+                    <th>email</th>
+                    <th>registration date</th>
+                    <th>country</th>
+                    <th>src_app</th>
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>                    
+                    <th>userid</th>
+                    <th>username</th>
+                    <th>email</th>
+                    <th>registration date</th>
+                    <th>country</th>
+                    <th>src_app</th>
+                  </tr>
+                </tfoot>
+              </table>  
+
+          </div>    
+
+        </td> <!-- end right pane -->
+
+      </tr>
+
+    </table> <!-- end main-pane -->
 
   </body>
   
