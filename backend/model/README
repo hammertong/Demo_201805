@@ -1,7 +1,0 @@
-
-DUMP DATABASE
-mysqldump <database_name> [table1 table2 ...] > dump.sql
-
-RESTORE
-mysql -u android -ppassword android < dump.sql
-

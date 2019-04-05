@@ -1,4 +1,0 @@
-1) Consuming data with receiver
-
-mosquitto_sub -t /upstream/# -v | php receiver.php
-
