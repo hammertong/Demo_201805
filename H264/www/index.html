@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!--
+  vim: set sts=2 sw=2 et :
+
+
+  Demo Javascript app for negotiating and streaming a sendrecv webrtc stream
+  with a GStreamer app. Runs only in passive mode, i.e., responds to offers
+  with answers, exchanges ICE candidates, and streams.
+
+  Author: Nirbheek Chauhan <nirbheek@centricular.com>
+-->
+<html>
+  <head>
+    <style>
+      body {
+        font-family: Arial;
+        font-size: 16px;
+      }
+      .error { color: red; }
+    </style>
+    
+    <!--
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    -->
+    
+    <script src="adapter-latest.js"></script>
+    <script src="webrtc.js"></script>
+
+    <script>  
+
+      window.onload = function() {
+        websocketServerConnect();
+        startTime();
+      }
+
+    </script>
+
+    <script>
+      
+      function startTime() {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById('txtClock').innerHTML =
+        h + ":" + m + ":" + s;
+        var t = setTimeout(startTime, 500);
+      }
+
+      function checkTime(i) {
+        if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+        return i;
+      }
+
+      function startStreaming() {
+        var camera = document.getElementById( "cameras" ).value;
+        if (camera == '--') {
+          alert("select camera, please ...");
+          return;
+        }
+        console.log( "selected camera : " + camera );
+        startCamera( camera );
+        document.getElementById( "cameras" ).disabled = true;
+        document.getElementById( "btnAction" ).value = "STOP";
+        document.getElementById( "btnAction" ).onclick = stopStreaming;
+      }
+
+      function stopStreaming() {
+        console.log( "stopping...  ");
+        stopCamera();
+        document.getElementById( "cameras" ).disabled = false;
+        document.getElementById( "btnAction" ).value = "START";
+        document.getElementById( "btnAction" ).onclick = startStreaming;
+      }
+
+
+    </script>
+
+  </head>
+
+  <body>
+
+
+    <table>
+      <tr>
+        <td>
+          <select id="cameras">
+            <!--
+            <option value="--">-- select streaming source --</option>
+          -->
+            <option value="rtsp://127.0.0.1:8554/test">Test streaming H264</option>
+            <option value="rtsp://192.168.1.3:554/live2.sdp">Vivotech IP Camera</option>
+          </select>
+        </td>
+        <td><input type="button" value="START" id="btnAction" onclick="startStreaming()"></td>        
+      </tr>
+    </table>
+
+
+    <div>status: <span id="txtClock"></span> &gt; <span id="status">unknown</span></div>
+
+    <div><textarea id="text" cols=40 rows=4></textarea></div>
+    
+    <div>Our id is <b id="peer-id">unknown</b></div>
+    
+    <br/>
+
+    <div style="display: none;">
+      <div>getUserMedia constraints being used:</div>
+      <div><textarea id="constraints" cols=40 rows=4></textarea></div>
+    </div>
+
+    <hr>
+    
+    <div><video id="stream" autoplay playsinline>Your browser doesn't support video</video></div>
+
+
+  </body>
+</html>
