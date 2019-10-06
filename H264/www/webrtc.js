@@ -342,7 +342,7 @@ function startCamera(rtspSource) {
         console.log("web socket connectors not initialized!");
         return;
     }    
-    ws_conn.send('WEBRTC START ' 
+    ws_conn.send('WEBRTCSTART ' 
         + document.getElementById("peer-id").textContent 
         + " " + rtspSource);
 }
@@ -352,6 +352,6 @@ function stopCamera() {
         console.log("web socket connectors not initialized!");
         return;
     }    
-    ws_conn.send('WEBRTC STOP ' 
+    ws_conn.send('WEBRTCSTOP ' 
         + document.getElementById("peer-id").textContent);
 }

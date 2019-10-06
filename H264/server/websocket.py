@@ -214,26 +214,28 @@ async def connection_handler(ws, uid):
                 msg = 'ROOM_PEER_JOINED {}'.format(uid)
                 print('room {}: {} -> {}: {}'.format(room_id, uid, pid, msg))
                 await wsp.send(msg)
-        elif msg.startswith('WEBRTC'):
+        elif msg.startswith('WEBRTCSTART'):
             # TODO/FIXME: 
             # 1) now running in background with '&', make it asynchronous in python
             # 2) save process in a process list associated to this peer-id
             # 3) create STOP to terminate process associated to this peer-id
             # 4) manage exceprtions and send client error message
             my_args = msg.split(" ")
-            my_command = my_args[1]
-            my_peer_id = my_args[2]
-            if my_command == 'START':
-                my_rtsp = my_args[3]            
-                #rtsp_command = "/home/federico/webrtc-h264/gst/webrtc --peer-id {!r} --rtsp-src {!r} &".format(my_peer_id, my_rtsp)
-                rtsp_command = "./webrtc --peer-id {!r} --rtsp-src {!r} &".format(my_peer_id, my_rtsp)
-                print("running {!r} ...".format(rtsp_command))
-                os.system(rtsp_command)
-            elif my_command == 'STOP':
-                #TODO: STOP here process associated to my_peer_id
-                await wsp.send("stopping webrtc ...")
-            else:
-                await wsp.send("error: wrong WEBRTC command")
+            my_peer_id = my_args[1]
+            my_rtsp = my_args[2]            
+            rtsp_command = "./webrtc --peer-id {!r} --rtsp-src {!r} &".format(my_peer_id, my_rtsp)
+            print("running {!r} ...".format(rtsp_command))
+            os.system(rtsp_command)
+        elif msg.startswith('WEBRTCSTOP'):
+            # TODO/FIXME: 
+            # 1) now running in background with '&', make it asynchronous in python
+            # 2) save process in a process list associated to this peer-id
+            # 3) create STOP to terminate process associated to this peer-id
+            # 4) manage exceprtions and send client error message
+            my_args = msg.split(" ")
+            my_peer_id = my_args[1]
+            #TODO: STOP here process associated to my_peer_id
+            await wsp.send("stopping webrtc peer-id {!r} ...".format(rtsp_command))
         else:
             print('Ignoring unknown message {!r} from {!r}'.format(msg, uid))
 
