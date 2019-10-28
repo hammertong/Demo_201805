@@ -301,12 +301,12 @@ function createCall(msg) {
     console.log('Creating RTCPeerConnection');
 
     peer_connection = new RTCPeerConnection(rtc_configuration);
-    send_channel = peer_connection.createDataChannel('label', null);
-    send_channel.onopen = handleDataChannelOpen;
-    send_channel.onmessage = handleDataChannelMessageReceived;
-    send_channel.onerror = handleDataChannelError;
-    send_channel.onclose = handleDataChannelClose;
-    peer_connection.ondatachannel = onDataChannel;
+    //send_channel = peer_connection.createDataChannel('label', null);
+    //send_channel.onopen = handleDataChannelOpen;
+    //send_channel.onmessage = handleDataChannelMessageReceived;
+    //send_channel.onerror = handleDataChannelError;
+    //send_channel.onclose = handleDataChannelClose;
+    //peer_connection.ondatachannel = onDataChannel;
     peer_connection.ontrack = onRemoteTrack;
     /* Send our video/audio to the other peer */
 
